@@ -44,7 +44,7 @@ export default function Contact() {
         >
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>
           <p className="text-[#a0a0a0] text-lg max-w-2xl">
-            Let's work together on your next AI project
+            Let&apos;s work together on your next AI project
           </p>
         </motion.div>
 

@@ -15,7 +15,7 @@ export default function About() {
         >
           <div className="max-w-4xl">
             <p className="text-xl lg:text-2xl leading-relaxed mb-8">
-              I'm <span className="text-gradient font-bold">VAIBHAV TYAGI</span>, an AI
+              I&apos;m <span className="text-gradient font-bold">VAIBHAV TYAGI</span>, an AI
               developer merging machine learning with cloud infrastructure to create
               intelligent, scalable systems.
             </p>
