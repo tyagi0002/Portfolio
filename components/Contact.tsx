@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { HiMail, HiPhone, HiLocationMarker } from 'react-icons/hi'
+import { FormEvent, useState } from 'react'
+import { HiMail, HiLocationMarker } from 'react-icons/hi'
 import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import GlassCard from './GlassCard'
 
 const contactInfo = [
   {
@@ -32,45 +33,42 @@ const contactInfo = [
 ]
 
 export default function Contact() {
-  return (
-    <section className="py-20 px-6 lg:px-12" id="contact">
-      <div className="max-w-[1400px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">Get In Touch</h2>
-          <p className="text-[#a0a0a0] text-lg max-w-2xl">
-            Let&apos;s work together on your next AI project
-          </p>
-        </motion.div>
+  const [sent, setSent] = useState(false)
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card-surface p-8"
-          >
-            <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const data = new FormData(e.currentTarget)
+    const name = String(data.get('name') || '')
+    const email = String(data.get('email') || '')
+    const message = String(data.get('message') || '')
+    const subject = encodeURIComponent(`Portfolio inquiry from ${name}`)
+    const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`)
+    window.location.href = `mailto:tyagivaibhav2018@gmail.com?subject=${subject}&body=${body}`
+    setSent(true)
+  }
+
+  return (
+    <section className="section-pad" id="contact">
+      <div className="mx-auto max-w-site">
+        <div className="mb-12 max-w-2xl">
+          <p className="eyebrow mb-3">Contact</p>
+          <h2 className="mb-4 text-4xl font-semibold md:text-5xl">Get in touch</h2>
+          <p className="text-lg text-[#9aa3b5]">If the problem is interesting, I want to hear it.</p>
+        </div>
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <GlassCard className="p-8" hoverTilt={false}>
+            <h3 className="mb-8 text-2xl font-semibold">Studio details</h3>
             <div className="space-y-6">
-              {contactInfo.map((item, index) => (
-                <div key={index} className="flex items-start gap-4">
-                  <div className="text-2xl text-blue-500 mt-1">{item.icon}</div>
+              {contactInfo.map((item) => (
+                <div key={item.label} className="flex items-start gap-4">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg text-[#c5d4ff]">
+                    {item.icon}
+                  </div>
                   <div>
-                    <div className="text-[#a0a0a0] text-sm mb-1">{item.label}</div>
+                    <div className="mb-1 text-xs tracking-[0.18em] uppercase text-[#8e98ad]">{item.label}</div>
                     {item.href ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white hover:text-blue-500 transition-colors"
-                      >
+                      <a href={item.href} target="_blank" rel="noopener noreferrer" className="text-white hover:text-[#c5d4ff]">
                         {item.value}
                       </a>
                     ) : (
@@ -80,50 +78,64 @@ export default function Contact() {
                 </div>
               ))}
             </div>
-          </motion.div>
+          </GlassCard>
 
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="card-surface p-8"
-          >
-            <h3 className="text-2xl font-bold mb-6">Send a Message</h3>
-            <form className="space-y-4">
-              <div>
-                <label className="block text-[#a0a0a0] text-sm mb-2">Name</label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="Your name"
-                />
+          <GlassCard className="p-8" hoverTilt={false}>
+            <h3 className="mb-8 text-2xl font-semibold">Send a note</h3>
+            {sent ? (
+              <div className="rounded-2xl border border-emerald-400/20 bg-emerald-400/10 p-6 text-emerald-100">
+                Your mail client should open shortly. If it doesn&apos;t, write me directly at
+                tyagivaibhav2018@gmail.com.
               </div>
-              <div>
-                <label className="block text-[#a0a0a0] text-sm mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <div>
-                <label className="block text-[#a0a0a0] text-sm mb-2">Message</label>
-                <textarea
-                  rows={6}
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-lg text-white focus:outline-none focus:border-blue-500 transition-colors resize-none"
-                  placeholder="Your message..."
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-              >
-                Send Message
-              </button>
-            </form>
-          </motion.div>
+            ) : (
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div>
+                  <label htmlFor="name" className="mb-2 block text-sm text-[#9aa3b5]">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    required
+                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-[#667084] focus:border-white/25 focus:outline-none"
+                    placeholder="Your name"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="email" className="mb-2 block text-sm text-[#9aa3b5]">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    className="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-[#667084] focus:border-white/25 focus:outline-none"
+                    placeholder="you@company.com"
+                  />
+                </div>
+                <div>
+                  <label htmlFor="message" className="mb-2 block text-sm text-[#9aa3b5]">
+                    Message
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={6}
+                    className="w-full resize-none rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-[#667084] focus:border-white/25 focus:outline-none"
+                    placeholder="What should we build?"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full rounded-full bg-white py-3 font-medium text-[#0b0d12] transition-opacity hover:opacity-90"
+                >
+                  Send message
+                </button>
+              </form>
+            )}
+          </GlassCard>
         </div>
       </div>
     </section>

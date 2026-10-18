@@ -1,74 +1,65 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { FaBrain, FaRobot, FaCloud, FaCode, FaDatabase, FaChartLine } from 'react-icons/fa'
+import GlassCard from './GlassCard'
 
 const services = [
   {
     icon: <FaBrain />,
     title: 'AI Development',
-    description: 'Custom machine learning solutions and neural networks for complex problems',
+    description: 'Custom models and neural systems for problems that cannot be templated.',
   },
   {
     icon: <FaRobot />,
     title: 'LLM & RAG Systems',
-    description: 'Advanced language models and retrieval-augmented generation pipelines',
+    description: 'Retrieval pipelines, grounding, evaluation, and latency-aware orchestration.',
   },
   {
     icon: <FaCloud />,
-    title: 'Cloud Solutions',
-    description: 'Scalable AWS infrastructure with DevOps automation',
+    title: 'Cloud Architecture',
+    description: 'AWS platforms with automation, scale, and disciplined cost control.',
   },
   {
     icon: <FaCode />,
-    title: 'Full-Stack Development',
-    description: 'Modern web applications with React, Next.js, and FastAPI',
+    title: 'Full-Stack Product',
+    description: 'Interfaces and APIs in Next.js and FastAPI that feel finished.',
   },
   {
     icon: <FaDatabase />,
     title: 'Data Engineering',
-    description: 'Robust data pipelines and ETL processes',
+    description: 'Reliable pipelines, stores, and transformations that models can trust.',
   },
   {
     icon: <FaChartLine />,
     title: 'MLOps',
-    description: 'Model deployment, monitoring, and production maintenance',
+    description: 'Deployment, monitoring, and lifecycle control for models in production.',
   },
 ]
 
 export default function Services() {
   return (
-    <section className="py-20 px-6 lg:px-12" id="services">
-      <div className="max-w-[1400px] mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
-          <h2 className="text-4xl lg:text-5xl font-bold mb-4">Services</h2>
-          <p className="text-[#a0a0a0] text-lg max-w-2xl">
-            Comprehensive AI and cloud solutions tailored to your needs
+    <section className="section-pad" id="services">
+      <div className="mx-auto max-w-site">
+        <div className="mb-12 max-w-2xl">
+          <p className="eyebrow mb-3">Capabilities</p>
+          <h2 className="mb-4 text-4xl font-semibold md:text-5xl">Services</h2>
+          <p className="text-lg text-[#9aa3b5]">
+            From research-grade models to infrastructure that stays up — a single, coherent stack.
           </p>
-        </motion.div>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="card-surface p-8 card-hover group"
-            >
-              <div className="text-4xl mb-6 text-blue-500 group-hover:scale-110 transition-transform">
-                {service.icon}
+            <GlassCard key={service.title} className="p-8">
+              <div className="mb-8 flex items-start justify-between">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-lg text-[#c5d4ff]">
+                  {service.icon}
+                </div>
+                <span className="font-display text-sm text-white/20">0{index + 1}</span>
               </div>
-              <h3 className="text-xl font-bold mb-3">{service.title}</h3>
-              <p className="text-[#a0a0a0]">{service.description}</p>
-            </motion.div>
+              <h3 className="mb-3 text-xl font-semibold">{service.title}</h3>
+              <p className="text-[#9aa3b5]">{service.description}</p>
+            </GlassCard>
           ))}
         </div>
       </div>

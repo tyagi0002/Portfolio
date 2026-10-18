@@ -1,85 +1,87 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { HiArrowRight } from 'react-icons/hi'
+import Image from 'next/image'
+import { FiArrowUpRight } from 'react-icons/fi'
+import GlassCard from './GlassCard'
 
 const projects = [
   {
     title: 'RAG Query System',
-    category: 'AI • LLM',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80',
-    description: 'Advanced retrieval-augmented generation system for intelligent document querying',
+    category: 'AI · LLM',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80',
+    description: 'Semantic retrieval over large document sets with production latency budgets.',
+    tags: ['LangChain', 'OpenAI', 'ChromaDB'],
+    href: 'https://github.com/tyagi0002',
   },
   {
     title: 'Cloud Architecture',
-    category: 'AWS • Infrastructure',
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80',
-    description: 'Scalable cloud infrastructure with automated deployment pipelines',
+    category: 'AWS · Infrastructure',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80',
+    description: 'Auto-scaling platforms with CI/CD, observability, and cost-aware design.',
+    tags: ['AWS', 'Terraform', 'Docker'],
+    href: 'https://github.com/tyagi0002',
   },
   {
     title: 'ML Pipeline',
     category: 'Machine Learning',
-    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600&q=80',
-    description: 'End-to-end machine learning pipeline for production environments',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&q=80',
+    description: 'End-to-end training, evaluation, and deployment loops for live models.',
+    tags: ['Python', 'TensorFlow', 'MLOps'],
+    href: 'https://github.com/tyagi0002',
   },
 ]
 
 export default function NewWork() {
   return (
-    <section className="py-12 px-6 lg:px-12" id="works">
-      <div className="max-w-[1400px] mx-auto">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="flex items-center justify-between mb-8"
-        >
-          <h2 className="text-3xl lg:text-4xl font-bold flex items-center gap-3">
-            New Work
-            <HiArrowRight className="text-blue-500" />
-          </h2>
-          <div className="flex gap-1">
-            <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-            <div className="w-2 h-2 rounded-full bg-white/20"></div>
-            <div className="w-2 h-2 rounded-full bg-white/20"></div>
+    <section className="section-pad" id="works">
+      <div className="mx-auto max-w-site">
+        <div className="mb-12 flex items-end justify-between gap-6">
+          <div>
+            <p className="eyebrow mb-3">Selected work</p>
+            <h2 className="text-4xl font-semibold md:text-5xl">Work that ships.</h2>
           </div>
-        </motion.div>
+          <p className="hidden max-w-sm text-sm leading-relaxed text-[#9aa3b5] md:block">
+            Systems designed for real load — retrieval, models, and infrastructure with a quiet
+            surface.
+          </p>
+        </div>
 
-        {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="card-surface overflow-hidden card-hover cursor-pointer group"
-            >
-              {/* Project Image */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-
-              {/* Project Info */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 group-hover:text-gradient transition-colors">
-                  {project.title}
-                </h3>
-                <p className="text-[#a0a0a0] text-sm mb-3">{project.category}</p>
-                <p className="text-[#888] text-sm">{project.description}</p>
-              </div>
-            </motion.div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {projects.map((project) => (
+            <GlassCard key={project.title} className="group h-full">
+              <a href={project.href} target="_blank" rel="noopener noreferrer" className="block">
+                <div className="relative h-64 overflow-hidden">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    fill
+                    className="object-cover transition-transform duration-700 ease-luxury group-hover:scale-[1.06]"
+                    sizes="(min-width: 1024px) 30vw, 100vw"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#06070b] via-[#06070b]/20 to-transparent" />
+                  <span className="absolute left-4 top-4 rounded-full border border-white/12 bg-black/25 px-3 py-1 text-[11px] tracking-wide text-white/90 backdrop-blur-xl">
+                    {project.category}
+                  </span>
+                </div>
+                <div className="p-6">
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <h3 className="text-2xl font-semibold">{project.title}</h3>
+                    <FiArrowUpRight className="mt-1 text-[#8e98ad] transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </div>
+                  <p className="mb-5 text-sm leading-relaxed text-[#9aa3b5]">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span key={tag} className="rounded-full border border-white/8 px-3 py-1 text-xs text-[#b4bccb]">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </a>
+            </GlassCard>
           ))}
         </div>
       </div>
     </section>
   )
 }
-
