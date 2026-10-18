@@ -8,7 +8,7 @@ const products = [
   {
     title: 'RAGMentor',
     description: 'A production-minded RAG template with LangChain, retrieval, and evaluation hooks.',
-    image: 'https://images.unsplash.com/photo-1676277791608-ac5257746a0e?w=1200&q=80',
+    image: '/images/jonakoh.jpg',
     tags: ['Python', 'LangChain', 'OpenAI'],
     link: 'https://github.com/tyagi0002',
   },

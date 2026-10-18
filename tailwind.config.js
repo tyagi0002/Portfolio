@@ -8,19 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#06070b',
-        surface: '#10131c',
-        'surface-light': '#171b27',
+        ink: '#070605',
+        ivory: '#f3eee6',
+        muted: '#8a8378',
+        lime: '#c8f542',
       },
       fontFamily: {
         sans: ['var(--font-sans)'],
-        display: ['var(--font-display)'],
+        serif: ['var(--font-serif)'],
+        mono: ['var(--font-mono)'],
       },
-      maxWidth: {
-        site: '1400px',
-      },
-      transitionTimingFunction: {
-        luxury: 'cubic-bezier(0.22, 1, 0.36, 1)',
+      letterSpacing: {
+        mega: '-0.06em',
       },
     },
   },
